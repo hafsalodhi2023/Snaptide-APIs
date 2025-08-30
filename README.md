@@ -29,10 +29,10 @@ just like a tide that flows seamlessly.
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/snaptide.git
+git clone git@github.com:hafsalodhi2023/Snaptide-APIs.git
 
 # Navigate into the project folder
-cd snaptide
+cd Snaptide-APIs
 
 # Install dependencies
 npm install
@@ -48,7 +48,7 @@ npm run dev
 ```
 
 Then open your browser at:  
-👉 `http://localhost:3000`
+👉 `http://localhost:9000`
 
 ---
 
