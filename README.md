@@ -1,5 +1,5 @@
-**# snaptide-apis
-**# 🌊 Snaptide
+
+**# 🌊 Snaptide APIs
 
 **Snap instantly. Ride the tide of downloads.**
 
