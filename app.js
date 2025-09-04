@@ -1,21 +1,38 @@
 require("dotenv").config();
+require("./config/passport.config");
 
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
+
 const debug = require("debug")("server:app.js");
+
+// Import Database Connection
 const connectDB = require("./config/db.config");
+
+// Import Rates Limit
+const { globalLimiter } = require("./middlewares/rateLimiter.middleware");
+
+// Import Routes
+const authRoutes = require("./routes/auth.route");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(cors());
-
 connectDB();
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use(express.json());
+app.use(cookieParser());
+app.use(globalLimiter); // Apply global rate limiter
+app.use(passport.initialize());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
+// Main Routes
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
   debug(`Server is running on http://localhost:${PORT}`);

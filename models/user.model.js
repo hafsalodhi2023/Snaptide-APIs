@@ -4,40 +4,51 @@ const debug = require("debug")("server:models:user.model.js");
 
 const userSchema = new mongoose.Schema(
   {
-    firstname: String,
-    lastname: String,
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      trim: true,
+      required: true,
+    },
+    password: { type: String, required: true },
+    googleId: String,
+    facebookId: String,
 
-    email: { type: String, unique: true, lowercase: true, trim: true },
-    password: String,
+    phone: String,
+    country: String,
+    state: String,
+    city: String,
+
+    avatar: String,
 
     provider: {
       type: String,
       enum: ["local", "google", "facebook"],
       default: "local",
     },
-    avatar: String,
-
     isVerified: { type: Boolean, default: false },
-
-    googleId: String,
-    facebookId: String,
   },
   { timestamps: true }
 );
 
+//about phone address
+
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    debug("Password not modified, skipping hash.");
+  if (!this.isModified("password") || !this.password) {
     return next();
   }
-  debug("Password is modified, Hashing password before saving user.");
-  const salt = await bcryptjs.genSalt(10); // Generate salt for hashing
+
+  const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
 userSchema.methods.comparePassword = async function (candidatePassword) {
+  if (!this.password) return false;
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);
