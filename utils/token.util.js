@@ -1,13 +1,13 @@
 const jwt = require("jsonwebtoken");
 
 const signAccessToken = (user) => {
-  return jwt.sign({ id: user._id.toString() }, process.env.JWT_ACCESS_SECRET, {
+  return jwt.sign({ id: user._id }, process.env.JWT_ACCESS_SECRET, {
     expiresIn: process.env.JWT_ACCESS_EXPIRES,
   });
 };
 
 const signRefreshToken = (user) => {
-  return jwt.sign({ id: user._id.toString() }, process.env.JWT_REFRESH_SECRET, {
+  return jwt.sign({ id: user._id }, process.env.JWT_REFRESH_SECRET, {
     expiresIn: process.env.JWT_REFRESH_EXPIRES,
   });
 };

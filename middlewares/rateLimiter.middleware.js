@@ -63,8 +63,8 @@ const globalLimiter = rateLimit({
 
 module.exports = {
   loginLimiter,
-  signupLimiter: registerLimiter,
-  resetLimiter: forgotLimiter,
+  registerLimiter,
+  forgotLimiter,
   apiLimiter,
   globalLimiter,
 };
