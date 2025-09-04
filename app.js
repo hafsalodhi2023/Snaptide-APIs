@@ -32,7 +32,7 @@ app.use(
   })
 );
 // Main Routes
-app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
 
 app.listen(PORT, () => {
   debug(`Server is running on http://localhost:${PORT}`);
