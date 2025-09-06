@@ -4,7 +4,7 @@ const passport = require("passport");
 
 // Importing utilities
 const { signAccessToken, signRefreshToken } = require("../utils/token.util");
-const setRefreshCookie = require("../utils/refreshCookie.util");
+const { setRefreshCookie } = require("../utils/refreshCookie.util");
 
 // Import Rate Limiter middlewares
 const {
@@ -17,6 +17,7 @@ const router = express.Router();
 // Importing controllers
 const register = require("../controllers/auths/register.controller");
 const login = require("../controllers/auths/login.controller");
+const refresh = require("../controllers/auths/refresh.controller");
 
 router.post("/register", registerLimiter, register);
 
@@ -47,5 +48,7 @@ router.get(
     res.redirect(redirectUrl);
   }
 );
+
+router.get("/refresh", refresh);
 
 module.exports = router;
