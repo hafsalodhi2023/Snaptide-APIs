@@ -2,7 +2,7 @@ const passport = require("passport");
 
 // Importing utilities
 const { signAccessToken, signRefreshToken } = require("../../utils/token.util");
-const setRefreshCookie = require("../../utils/setRefreshCookie.util");
+const { setRefreshCookie } = require("../../utils/refreshCookie.util");
 const debug = require("debug")("server:controllers:auths:login.controller.js");
 
 const login = (req, res, next) => {

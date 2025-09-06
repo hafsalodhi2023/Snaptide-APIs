@@ -4,13 +4,12 @@ const passport = require("passport");
 
 // Importing utilities
 const { signAccessToken, signRefreshToken } = require("../utils/token.util");
-const setRefreshCookie = require("../utils/setRefreshCookie.util");
+const setRefreshCookie = require("../utils/refreshCookie.util");
 
 // Import Rate Limiter middlewares
 const {
   loginLimiter,
   registerLimiter,
-  forgotLimiter,
 } = require("../middlewares/rateLimiter.middleware");
 
 const router = express.Router();

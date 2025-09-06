@@ -8,4 +8,12 @@ const setRefreshCookie = (res, token) => {
   });
 };
 
-module.exports = setRefreshCookie;
+const clearRefreshCookie = (res) => {
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
+};
+
+module.exports = { setRefreshCookie, clearRefreshCookie };
