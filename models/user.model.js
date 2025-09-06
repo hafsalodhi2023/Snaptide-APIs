@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema(
     },
     password: { type: String },
     googleId: String,
-    facebookId: String,
 
     phone: String,
     country: String,
@@ -26,7 +25,7 @@ const userSchema = new mongoose.Schema(
 
     provider: {
       type: String,
-      enum: ["local", "google", "facebook"],
+      enum: ["local", "google"],
       default: "local",
     },
     isVerified: { type: Boolean, default: false },
