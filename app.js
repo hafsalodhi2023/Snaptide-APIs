@@ -16,6 +16,7 @@ const { globalLimiter } = require("./middlewares/rateLimiter.middleware");
 
 // Import Routes
 const authRoutes = require("./routes/auth.route");
+const userRoutes = require("./routes/user.route");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +34,7 @@ app.use(
 );
 // Main Routes
 app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
 
 app.listen(PORT, () => {
   debug(`Server is running on http://localhost:${PORT}`);
