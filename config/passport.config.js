@@ -59,7 +59,6 @@ passport.use(
           await user.save();
         }
 
-        debug(profile, email);
         return done(null, "ok");
       } catch (error) {
         return done(error, null);

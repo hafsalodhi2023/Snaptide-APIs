@@ -20,8 +20,12 @@ const login = require("../controllers/auths/login.controller");
 const refresh = require("../controllers/auths/refresh.controller");
 
 router.post("/register", registerLimiter, register);
+// router.post("/register", register);
 
 router.post("/login", loginLimiter, login);
+// router.post("/login", login);
+
+router.get("/refresh", refresh);
 
 router.get(
   "/google",
@@ -48,7 +52,5 @@ router.get(
     res.redirect(redirectUrl);
   }
 );
-
-router.get("/refresh", refresh);
 
 module.exports = router;
