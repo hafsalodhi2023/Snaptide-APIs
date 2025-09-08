@@ -10,6 +10,7 @@ const { verifyAccessToken } = require("../../utils/token.util");
 
 const getProfile = async (req, res) => {
   try {
+    console.log("Controller hit");
     const { accessToken } = req.cookies;
     const decodedAccessToken = verifyAccessToken(accessToken);
     const { id } = decodedAccessToken;
