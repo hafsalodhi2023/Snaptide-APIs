@@ -54,8 +54,8 @@ router.get(
     const user = await User.findOne({ googleId: req.user.googleId }).select(
       "-password -__v -createdAt -updatedAt -_id -provider -isVerified -googleId"
     );
-    const accessToken = signAccessToken(user._id);
-    const refreshToken = signRefreshToken(user._id);
+    const accessToken = signAccessToken(user);
+    const refreshToken = signRefreshToken(user);
 
     setRefreshCookie(res, refreshToken);
 
