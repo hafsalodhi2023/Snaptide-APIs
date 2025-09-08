@@ -16,4 +16,11 @@ const clearRefreshCookie = (res) => {
   });
 };
 
-module.exports = { setRefreshCookie, clearRefreshCookie };
+const clearAccessCookie = (res) => {
+  res.clearCookie("accessToken", {
+    secure: false,
+    sameSite: "none",
+  });
+};
+
+module.exports = { setRefreshCookie, clearRefreshCookie, clearAccessCookie };

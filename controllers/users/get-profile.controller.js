@@ -16,7 +16,7 @@ const getProfile = async (req, res) => {
     const { id } = decodedAccessToken;
 
     const user = await User.findById(id).select(
-      "-password -__v -createdAt -updatedAt -_id"
+      "-password -__v -createdAt -updatedAt -_id -provider -isVerified -googleId"
     );
 
     if (!user) {

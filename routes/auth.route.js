@@ -2,6 +2,9 @@
 const express = require("express");
 const passport = require("passport");
 
+// Importing User model
+const User = require("../models/user.model");
+
 // Importing utilities
 const { signAccessToken, signRefreshToken } = require("../utils/token.util");
 const { setRefreshCookie } = require("../utils/refreshCookie.util");
@@ -12,12 +15,18 @@ const {
   registerLimiter,
 } = require("../middlewares/rateLimiter.middleware");
 
+// Importing middlewares
+const authenticate = require("../middlewares/auth.middleware");
+
 const router = express.Router();
 
 // Importing controllers
 const register = require("../controllers/auths/register.controller");
 const login = require("../controllers/auths/login.controller");
 const refresh = require("../controllers/auths/refresh.controller");
+const logout = require("../controllers/auths/logout.controller");
+
+router.post("/logout", authenticate, logout);
 
 router.post("/register", registerLimiter, register);
 // router.post("/register", register);
@@ -42,7 +51,9 @@ router.get(
     failureRedirect: `${process.env.CLIENT_URL}/login`,
   }),
   async (req, res) => {
-    const user = req.user;
+    const user = await User.findOne({ googleId: req.user.googleId }).select(
+      "-password -__v -createdAt -updatedAt -_id -provider -isVerified -googleId"
+    );
     const accessToken = signAccessToken(user._id);
     const refreshToken = signRefreshToken(user._id);
 
