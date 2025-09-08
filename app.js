@@ -22,10 +22,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 connectDB();
-app.use(express.json());
-app.use(cookieParser());
-app.use(globalLimiter); // Apply global rate limiter
-app.use(passport.initialize());
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -33,6 +29,11 @@ app.use(
     credentials: true,
   })
 );
+app.use(express.json());
+app.use(cookieParser());
+app.use(globalLimiter); // Apply global rate limiter
+app.use(passport.initialize());
+
 // Main Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
