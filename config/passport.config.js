@@ -44,7 +44,27 @@ passport.use(
         });
 
         if (!user) {
+          user = await User.create({
+            firstName: profile.name?.givenName,
+            lastName: profile.name?.familyName,
+            email,
+            avatar: profile.photos?.[0]?.value,
+            provider: "google",
+            isVerified: true,
+            googleId: profile.id,
+          });
+        } else if (!user.googleId) {
+          // Link googleId if user existed by email
+          user.googleId = profile.id;
+          await user.save();
+        }
 
-          
+        return done(null, user);
+      } catch (error) {
+        return done(error, null);
+      }
+    }
+  )
+);
 
 module.exports = passport;
