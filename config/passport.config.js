@@ -59,7 +59,7 @@ passport.use(
           await user.save();
         }
 
-        return done(null, "ok");
+        return done(null, user);
       } catch (error) {
         return done(error, null);
       }

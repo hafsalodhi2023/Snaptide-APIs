@@ -43,8 +43,8 @@ router.get(
   }),
   async (req, res) => {
     const user = req.user;
-    const accessToken = signAccessToken(user);
-    const refreshToken = signRefreshToken(user);
+    const accessToken = signAccessToken(user._id);
+    const refreshToken = signRefreshToken(user._id);
 
     setRefreshCookie(res, refreshToken);
 
