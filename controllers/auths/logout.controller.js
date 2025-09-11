@@ -6,7 +6,7 @@ const {
 const logout = (req, res) => {
   clearRefreshCookie(res);
   clearAccessCookie(res);
-  return res.status(200).json({ message: "Logged out successfully" });
+  return res.status(200).json({ msg: "Logged out successfully" });
 };
 
 module.exports = logout;
