@@ -3,6 +3,8 @@ const passport = require("passport");
 // Importing utilities
 const { signAccessToken, signRefreshToken } = require("../../utils/token.util");
 const { setRefreshCookie } = require("../../utils/refreshCookie.util");
+const findLocation = require("../../utils/findLocation.util");
+
 const debug = require("debug")("server:controllers:auths:login.controller.js");
 
 const login = (req, res, next) => {
@@ -14,6 +16,8 @@ const login = (req, res, next) => {
     const refreshToken = signRefreshToken(user);
 
     setRefreshCookie(res, refreshToken);
+
+    findLocation(req, res);
 
     return res.json({
       accessToken,

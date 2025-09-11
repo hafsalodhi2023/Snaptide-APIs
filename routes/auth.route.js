@@ -52,7 +52,7 @@ router.get(
   }),
   async (req, res) => {
     const user = await User.findOne({ googleId: req.user.googleId }).select(
-      "-password -__v -createdAt -updatedAt -provider -isVerified -googleId"
+      "-password -__v -createdAt -updatedAt -isVerified -googleId"
     );
     const accessToken = signAccessToken(user);
     const refreshToken = signRefreshToken(user);

@@ -1,7 +1,7 @@
 // Importing User and Otp models
 const User = require("../../models/user.model");
 
-const { clearRefreshCookie } = require("../../utils/refreshCookie.util");
+const hostname = require("os").hostname();
 
 const debug = require("debug")(
   "server:controllers:auths:register.controller.js"
