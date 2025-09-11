@@ -10,6 +10,6 @@ const authenticate = require("../middlewares/auth.middleware");
 const router = express.Router();
 
 router.get("/get-profile", authenticate, profile);
-router.get("/delete-profile", deleteProfile);
+router.delete("/delete-profile", deleteProfile);
 
 module.exports = router;
