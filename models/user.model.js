@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String },
     googleId: String,
 
-    phone: String,
+    phone: Number,
     country: String,
     state: String,
     city: String,
