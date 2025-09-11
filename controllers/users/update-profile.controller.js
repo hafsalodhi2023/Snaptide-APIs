@@ -1,7 +1,6 @@
 const User = require("../../models/user.model");
 const { verifyAccessToken } = require("../../utils/token.util");
 
-// create updateProfile controller for firstName, lastName, phone, country, state, city
 const updateProfile = async (req, res) => {
   try {
     const token = req.cookies.accessToken;
@@ -23,9 +22,9 @@ const updateProfile = async (req, res) => {
     Object.keys(updatedData).forEach(
       (key) => updatedData[key] === undefined && delete updatedData[key]
     );
-    const user = await User.find
-      .findByIdAndUpdate(userId, updatedData, { new: true })
-      .select("-password -__v -createdAt -updatedAt -isVerified -googleId");
+    const user = await User.findByIdAndUpdate(userId, updatedData, {
+      new: true,
+    }).select("-password -__v -createdAt -updatedAt -isVerified -googleId");
     if (!user) {
       return res.status(404).json({ msg: "User not found" });
     }
