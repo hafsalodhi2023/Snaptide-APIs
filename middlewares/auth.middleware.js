@@ -12,6 +12,11 @@ const auth = async (req, res, next) => {
     }
 
     const payload = verifyAccessToken(token);
+    if (!payload) {
+      return res.status(401).json({
+        msg: "Not authorized, token failed",
+      });
+    }
 
     req.user = { id: payload.id };
 
