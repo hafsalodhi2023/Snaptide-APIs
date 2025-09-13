@@ -1,6 +1,8 @@
 const fetch = require("node-fetch");
 const useragent = require("useragent");
 
+const debug = require("debug")("server:utils:findLocation.util.js");
+
 global.fetch = require("node-fetch");
 
 function getClientIp(req) {
@@ -24,7 +26,7 @@ module.exports = async (req, res) => {
       locationString = `${data.city}, ${data.country_name}`;
     }
   } catch (err) {
-    console.error("Geo lookup failed:", err.message);
+    debug("Geo lookup failed:", err.message);
   }
-  console.log(`New login from ${deviceString} in ${locationString}`);
+  debug(`New login from ${deviceString} in ${locationString}`);
 };

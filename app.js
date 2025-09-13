@@ -17,6 +17,7 @@ const { globalLimiter } = require("./middlewares/rateLimiter.middleware");
 // Import Routes
 const authRoutes = require("./routes/auth.route");
 const userRoutes = require("./routes/user.route");
+const uploadRoutes = require("./routes/upload.route");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -37,6 +38,7 @@ app.use(passport.initialize());
 // Main Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/uploads", uploadRoutes);
 
 app.listen(PORT, () => {
   debug(`Server is running on http://localhost:${PORT}`);

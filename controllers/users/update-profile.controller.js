@@ -1,6 +1,10 @@
 const User = require("../../models/user.model");
 const { verifyAccessToken } = require("../../utils/token.util");
 
+const debug = require("debug")(
+  "server:controllers:users:update-profile.controller.js"
+);
+
 const updateProfile = async (req, res) => {
   try {
     const token = req.cookies.accessToken;
@@ -30,7 +34,7 @@ const updateProfile = async (req, res) => {
     }
     res.json({ msg: "Profile updated successfully", user });
   } catch (error) {
-    console.error("Error updating profile:", error);
+    debug("Error updating profile:", error);
     res.status(500).json({ msg: "Server error" });
   }
 };

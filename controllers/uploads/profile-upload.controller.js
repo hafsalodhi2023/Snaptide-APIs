@@ -2,14 +2,20 @@ const sharp = require("sharp");
 const imagekit = require("../../config/imagekit.config");
 const User = require("../../models/user.model");
 
+const debug = require("debug")(
+  "server:controllers:uploads:profile-upload.controller"
+);
+
 // Controller for profile image upload
 const uploadProfileImage = async (req, res) => {
   try {
-    if (!req.file) return res.status(400).json({ msg: "No file uploaded" });
+    if (!req.file) {
+      return res.status(400).json({ msg: "No file uploaded" });
+    }
 
     // Compress + resize using sharp
     const processedBuffer = await sharp(req.file.buffer)
-      .resize(512, 512, { fit: "cover" })
+      .resize(256, 256, { fit: "cover" })
       .toFormat("webp", { quality: 80 })
       .toBuffer();
 
@@ -25,7 +31,7 @@ const uploadProfileImage = async (req, res) => {
       useUniqueFileName: true,
     });
 
-    // Update user document
+    // Update user document (without upsert)
     const user = await User.findByIdAndUpdate(
       req.params.userId,
       {
@@ -34,13 +40,17 @@ const uploadProfileImage = async (req, res) => {
           fileId: uploadResult.fileId,
         },
       },
-      { new: true, upsert: true }
+      { new: true }
     );
+
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
 
     res.json({ msg: "Avatar uploaded successfully", avatar: user.avatar });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: "Upload failed", error: err.msg });
+    debug(err);
+    res.status(500).json({ msg: "Upload failed", error: err.message });
   }
 };
 
