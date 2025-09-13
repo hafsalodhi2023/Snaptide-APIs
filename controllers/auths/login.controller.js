@@ -10,9 +10,15 @@ const debug = require("debug")("server:controllers:auths:login.controller.js");
 const login = (req, res, next) => {
   try {
     passport.authenticate("local", { session: false }, (err, user, info) => {
-      if (err) return res.status(401).json({ msg: "Auth error" });
-      if (!user)
-        return res.status(400).json({ msg: info?.message || "Invalid" });
+      if (err) {
+        return res.status(500).json({ msg: "Auth error" });
+      }
+
+      if (!user) {
+        return res.status(401).json({
+          msg: info?.msg || "Invalid credentials",
+        });
+      }
 
       const accessToken = signAccessToken(user);
       const refreshToken = signRefreshToken(user);
