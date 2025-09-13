@@ -26,7 +26,7 @@ const login = require("../controllers/auths/login.controller");
 const refresh = require("../controllers/auths/refresh.controller");
 const logout = require("../controllers/auths/logout.controller");
 
-router.post("/logout", authenticate, logout);
+router.delete("/logout", authenticate, logout);
 
 router.post("/register", registerLimiter, register);
 // router.post("/register", register);

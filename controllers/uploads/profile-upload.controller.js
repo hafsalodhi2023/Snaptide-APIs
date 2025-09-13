@@ -5,7 +5,7 @@ const User = require("../../models/user.model");
 // Controller for profile image upload
 const uploadProfileImage = async (req, res) => {
   try {
-    if (!req.file) return res.status(400).json({ message: "No file uploaded" });
+    if (!req.file) return res.status(400).json({ msg: "No file uploaded" });
 
     // Compress + resize using sharp
     const processedBuffer = await sharp(req.file.buffer)
@@ -37,10 +37,10 @@ const uploadProfileImage = async (req, res) => {
       { new: true, upsert: true }
     );
 
-    res.json({ message: "Avatar uploaded successfully", avatar: user.avatar });
+    res.json({ msg: "Avatar uploaded successfully", avatar: user.avatar });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Upload failed", error: err.message });
+    res.status(500).json({ msg: "Upload failed", error: err.msg });
   }
 };
 
