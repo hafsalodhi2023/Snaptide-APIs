@@ -21,7 +21,10 @@ const userSchema = new mongoose.Schema(
     state: String,
     city: String,
 
-    avatar: String,
+    avatar: {
+      url: String,
+      fileId: String,
+    },
 
     provider: {
       type: String,
