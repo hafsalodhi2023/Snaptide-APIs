@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
         type: String,
         required: true,
         default:
-          "https://ik.imagekit.io/snaptideapis/snaptide/avatars/default.webp?updatedAt=1757870630493",
+          "https://ik.imagekit.io/snaptideapis/snaptide/avatars/default.webp",
       },
       fileId: String,
     },
