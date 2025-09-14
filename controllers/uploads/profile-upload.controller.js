@@ -1,6 +1,7 @@
 const sharp = require("sharp");
 const imagekit = require("../../config/imagekit.config");
 const User = require("../../models/user.model");
+const { verifyAccessToken } = require("../../utils/token.util");
 
 const debug = require("debug")(
   "server:controllers:uploads:profile-upload.controller"
@@ -9,6 +10,19 @@ const debug = require("debug")(
 // Controller for profile image upload
 const uploadProfileImage = async (req, res) => {
   try {
+    const accessToken = req.cookies.accessToken;
+
+    if (!accessToken) {
+      return res.status(401).json({ msg: "Unauthorized" });
+    }
+
+    const decoded = verifyAccessToken(accessToken);
+    const userId = decoded.id;
+
+    if (!decoded) {
+      return res.status(401).json({ msg: "Unauthorized" });
+    }
+
     if (!req.file) {
       return res.status(400).json({ msg: "No file uploaded" });
     }
@@ -26,14 +40,14 @@ const uploadProfileImage = async (req, res) => {
     // Upload to ImageKit
     const uploadResult = await imagekit.upload({
       file: fileBase64,
-      fileName: `avatar_${req.params.userId}_${Date.now()}.webp`,
+      fileName: `avatar_${userId}_${Date.now()}.webp`,
       folder: "/snaptide/avatars",
       useUniqueFileName: true,
     });
 
     // Update user document (without upsert)
     const user = await User.findByIdAndUpdate(
-      req.params.userId,
+      userId,
       {
         avatar: {
           url: uploadResult.url,
