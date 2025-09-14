@@ -22,7 +22,12 @@ const userSchema = new mongoose.Schema(
     city: String,
 
     avatar: {
-      url: String,
+      url: {
+        type: String,
+        required: true,
+        default:
+          "https://ik.imagekit.io/snaptideapis/snaptide/avatars/default.webp?updatedAt=1757870630493",
+      },
       fileId: String,
     },
 
