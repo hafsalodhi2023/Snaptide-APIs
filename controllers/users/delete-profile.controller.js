@@ -9,6 +9,8 @@ const {
 const deleteProfile = async (req, res) => {
   try {
     const token = req.cookies.accessToken;
+    const reason = req.body.reason;
+    console.log("Reason for deletion:", reason);
     if (!token) {
       return res.status(401).json({ msg: "Unauthorized" });
     }
