@@ -24,8 +24,9 @@ const usersGraveyard = new mongoose.Schema({
     default: Date.now,
   },
   meta: {
-    ip: String,
-    userAgent: String, // helpful for forensic analysis
+    clientIp: String,
+    proxyChain: [String],
+    userAgent: String,
   },
 });
 

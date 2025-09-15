@@ -22,7 +22,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
     "multer": "^2.0.2",
-    "node-fetch": "^2.7.0",
     "nodemailer": "^7.0.6",
     "passport": "^0.7.0",
     "passport-facebook": "^3.0.0",
