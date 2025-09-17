@@ -61,7 +61,9 @@ const uploadProfileImage = async (req, res) => {
       return res.status(404).json({ msg: "User not found" });
     }
 
-    res.json({ msg: "Avatar uploaded successfully", avatar: user.avatar });
+    res
+      .status(200)
+      .json({ msg: "Avatar uploaded successfully", avatar: user.avatar });
   } catch (err) {
     debug(err);
     res.status(500).json({ msg: "Upload failed", error: err.message });
