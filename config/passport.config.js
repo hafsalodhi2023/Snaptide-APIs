@@ -43,8 +43,6 @@ passport.use(
           $or: [{ googleId: profile.id }, { email }],
         });
 
-        console.log(profile.photos[0].value);
-
         if (!user) {
           user = await User.create({
             firstName: profile.name?.givenName,
