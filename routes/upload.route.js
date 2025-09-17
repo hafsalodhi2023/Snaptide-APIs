@@ -4,6 +4,6 @@ const { uploadSingleImage } = require("../middlewares/multer.middleware");
 const uploadProfileImage = require("../controllers/uploads/profile-upload.controller");
 
 // Upload profile avatar
-router.post("/profile", uploadSingleImage("avatar"), uploadProfileImage);
+router.put("/profile", uploadSingleImage("avatar"), uploadProfileImage);
 
 module.exports = router;
