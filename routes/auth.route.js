@@ -28,11 +28,11 @@ const logout = require("../controllers/auths/logout.controller");
 
 router.delete("/logout", authenticate, logout);
 
-router.post("/register", registerLimiter, register);
-// router.post("/register", register);
+// router.post("/register", registerLimiter, register);
+router.post("/register", register);
 
-router.post("/login", loginLimiter, login);
-// router.post("/login", login);
+// router.post("/login", loginLimiter, login);
+router.post("/login", login);
 
 router.get("/refresh", refresh);
 
