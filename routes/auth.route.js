@@ -59,7 +59,7 @@ router.get(
 
     setRefreshCookie(res, refreshToken);
 
-    const redirectUrl = `http://localhost:5173/google/callback?token=${accessToken}`;
+    const redirectUrl = `${process.env.CLIENT_URL}/google/callback?token=${accessToken}`;
     res.redirect(redirectUrl);
   }
 );
