@@ -14,6 +14,9 @@ const connectDB = require("./config/db.config");
 // Import Rates Limit
 const { globalLimiter } = require("./middlewares/rateLimiter.middleware");
 
+// Import Controllers
+const avatarProxy = require("./controllers/avatarProxy.controller");
+
 // Import Routes
 const authRoutes = require("./routes/auth.route");
 const userRoutes = require("./routes/user.route");
@@ -39,6 +42,8 @@ app.use(passport.initialize());
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/uploads", uploadRoutes);
+
+app.get("/avatar-proxy", avatarProxy);
 
 app.listen(PORT, () => {
   debug(`Server is running on http://localhost:${PORT}`);
