@@ -25,6 +25,8 @@ const register = require("../controllers/auths/register.controller");
 const login = require("../controllers/auths/login.controller");
 const refresh = require("../controllers/auths/refresh.controller");
 const logout = require("../controllers/auths/logout.controller");
+const requestPasswordReset = require("../controllers/auths/forgotPassword.controller");
+const resetPassword = require("../controllers/auths/resetPassword.controller");
 
 router.delete("/logout", authenticate, logout);
 
@@ -34,7 +36,7 @@ router.post("/register", register);
 // router.post("/login", loginLimiter, login);
 router.post("/login", login);
 
-router.get("/refresh", refresh);
+router.get("/refresh", authenticate, refresh);
 
 router.get(
   "/google",
@@ -63,5 +65,8 @@ router.get(
     res.redirect(redirectUrl);
   }
 );
+
+router.post("/forgot-password", requestPasswordReset);
+router.put("/reset-password", resetPassword);
 
 module.exports = router;
