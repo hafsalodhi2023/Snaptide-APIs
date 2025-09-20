@@ -16,7 +16,7 @@ const login = (req, res, next) => {
 
       if (!user) {
         return res.status(401).json({
-          msg: info?.msg || "Invalid credentials",
+          msg: "Invalid credentials",
         });
       }
 
