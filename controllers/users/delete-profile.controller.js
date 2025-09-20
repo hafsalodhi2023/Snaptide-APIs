@@ -62,7 +62,6 @@ const deleteProfile = async (req, res) => {
 
     return res.status(200).json({ msg: "Profile deleted successfully" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ msg: "Server error" });
   }
 };

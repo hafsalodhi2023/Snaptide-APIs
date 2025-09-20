@@ -11,12 +11,12 @@ const login = (req, res, next) => {
   try {
     passport.authenticate("local", { session: false }, (err, user, info) => {
       if (err) {
-        return res.status(500).json({ msg: "Auth error" });
+        return res.status(500).json({ msg: "Authentication error" });
       }
 
       if (!user) {
         return res.status(401).json({
-          msg: "Invalid credentials",
+          msg: info.msg || "Invalid credentials",
         });
       }
 
