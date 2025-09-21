@@ -22,7 +22,21 @@ const getProfile = async (req, res) => {
       return res.status(404).json({ msg: "User not found" });
     }
 
-    res.status(200).json({ user });
+    res.status(200).json({
+      user: {
+        _id: user._id,
+        avatar: user.avatar,
+        city: user.city,
+        country: user.country,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+        provider: user.provider,
+        state: user.state,
+        hasPassword: !!user.password,
+      },
+    });
   } catch (error) {
     debug(error);
     res.status(500).json({ msg: "Server error" });
