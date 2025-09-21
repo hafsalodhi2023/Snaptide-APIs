@@ -4,7 +4,7 @@ const PasswordResetToken = require("../../models/passwordToken.model");
 
 async function validateResetToken(req, res) {
   try {
-    const { userId, token } = req.query;
+    const { userId, token } = req.body;
     if (!userId || !token) {
       return res.status(400).json({ valid: false, msg: "Missing params" });
     }
