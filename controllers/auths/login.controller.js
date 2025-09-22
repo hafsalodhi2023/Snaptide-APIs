@@ -16,11 +16,15 @@ const login = (req, res, next) => {
     "local",
     { session: false },
     async (err, user, info) => {
-      if (err) return res.status(500).json({ msg: "Authentication error" });
-      if (!user)
+      if (err)
         return res
-          .status(401)
-          .json({ msg: info?.msg || "Invalid credentials" });
+          .status(500)
+          .json({ msg: "Authentication error", isVerified: user.isVerified });
+      if (!user)
+        return res.status(401).json({
+          msg: info?.msg || "Invalid credentials",
+          isVerified: user.isVerified,
+        });
 
       if (!user.isVerified) {
         try {
@@ -56,6 +60,7 @@ const login = (req, res, next) => {
           return res.status(403).json({
             msg: "Account not verified. Please verify your email to continue.",
             token: pendingToken,
+            isVerified: user.isVerified,
           });
         } catch (e) {
           console.log(e);
@@ -71,6 +76,7 @@ const login = (req, res, next) => {
 
       return res.json({
         accessToken,
+        isVerified: user.isVerified,
         user: {
           id: user._id,
           email: user.email,
