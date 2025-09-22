@@ -3,22 +3,14 @@ const { verifyAccessToken } = require("../../utils/token.util");
 
 async function updatePassword(req, res) {
   try {
-    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const { oldPassword, newPassword } = req.body;
     const accessToken = req.cookies.accessToken;
+    console.log("old password: ", oldPassword, "new Password: ", newPassword);
 
-    const payload = verifyAccessToken(accessToken);
-    if (!payload || !payload.id) {
-      return res.status(401).json({ msg: "Invalid or expired token" });
-    }
+    const userId = verifyAccessToken(accessToken);
 
-    if (!newPassword || !confirmPassword) {
-      return res
-        .status(400)
-        .json({ msg: "New password and confirm password required" });
-    }
-
-    if (newPassword !== confirmPassword) {
-      return res.status(400).json({ msg: "Passwords do not match" });
+    if (!oldPassword || !newPassword) {
+      return res.status(400).json({ msg: "All fields are required" });
     }
 
     if (newPassword.length < 8) {
@@ -27,17 +19,17 @@ async function updatePassword(req, res) {
         .json({ msg: "Password must be at least 8 characters" });
     }
 
-    const user = await User.findById(payload.id);
+    const user = await User.findById(userId.id);
     if (!user) return res.status(404).json({ msg: "User not found" });
 
     if (user.password) {
-      const isMatch = await user.comparePassword(oldPassword || "");
+      const isMatch = await user.comparePassword(oldPassword);
       if (!isMatch) {
         return res.status(401).json({ msg: "Old password is incorrect" });
       }
     }
-
-    user.password = newPassword;
+    // set new password
+    user.password = newPassword; // pre-save hook will hash it
     await user.save();
 
     return res.status(200).json({ msg: "Password updated successfully" });
