@@ -9,7 +9,7 @@ async function updatePassword(req, res) {
 
     const userId = verifyAccessToken(accessToken);
 
-    if (!oldPassword || !newPassword) {
+    if (!newPassword) {
       return res.status(400).json({ msg: "All fields are required" });
     }
 
