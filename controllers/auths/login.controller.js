@@ -53,11 +53,8 @@ const login = (req, res, next) => {
           // pending verification JWT
           const pendingToken = signPendingVerificationToken(user);
 
-          return res.status(403).json({
-            msg: "Account not verified. OTP sent to email.",
-            token: pendingToken, // frontend stores this to call verifyOtp
-            email: user.email,
-          });
+          const redirectUrl = `${process.env.CLIENT_URL}/verify-account?token=${pendingToken}`;
+          res.redirect(redirectUrl);
         } catch (e) {
           return res.status(500).json({ msg: "Could not send OTP" });
         }

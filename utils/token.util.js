@@ -16,7 +16,6 @@ signPendingVerificationToken = (user) => {
   return jwt.sign(
     {
       id: user._id,
-      email: user.email,
       pendingVerification: true,
     },
     process.env.JWT_PENDING_VERIFY_SECRET,
