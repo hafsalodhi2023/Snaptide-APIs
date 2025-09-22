@@ -12,7 +12,7 @@ const signRefreshToken = (user) => {
   });
 };
 
-signPendingVerificationToken = (user) => {
+const signPendingVerificationToken = (user) => {
   return jwt.sign(
     {
       id: user._id,

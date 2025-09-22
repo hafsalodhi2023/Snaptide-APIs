@@ -56,6 +56,7 @@ const login = (req, res, next) => {
           const redirectUrl = `${process.env.CLIENT_URL}/verify-account?token=${pendingToken}`;
           res.redirect(redirectUrl);
         } catch (e) {
+          console.log(e);
           return res.status(500).json({ msg: "Could not send OTP" });
         }
       }
