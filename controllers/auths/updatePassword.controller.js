@@ -4,7 +4,8 @@ const { verifyAccessToken } = require("../../utils/token.util");
 async function updatePassword(req, res) {
   try {
     const { oldPassword, newPassword, confirmPassword } = req.body;
-    const accessToken = req.cookie.accessToken;
+    const accessToken = req.cookies.accessToken;
+
     const userId = verifyAccessToken(accessToken);
 
     if (!oldPassword || !newPassword || !confirmPassword) {
