@@ -37,4 +37,5 @@ module.exports = {
   verifyAccessToken,
   signRefreshToken,
   verifyRefreshToken,
+  signPendingVerificationToken,
 };
