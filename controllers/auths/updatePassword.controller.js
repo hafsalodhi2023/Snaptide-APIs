@@ -5,13 +5,10 @@ async function updatePassword(req, res) {
   try {
     const { oldPassword, newPassword } = req.body;
     const accessToken = req.cookies.accessToken;
+
     console.log("old password: ", oldPassword, "new Password: ", newPassword);
 
-    const userId = verifyAccessToken(accessToken);
-
-    if (!newPassword) {
-      return res.status(400).json({ msg: "All fields are required" });
-    }
+    const payload = verifyAccessToken(accessToken);
 
     if (newPassword.length < 8) {
       return res
@@ -19,7 +16,7 @@ async function updatePassword(req, res) {
         .json({ msg: "Password must be at least 8 characters" });
     }
 
-    const user = await User.findById(userId.id);
+    const user = await User.findById(payload.id);
     if (!user) return res.status(404).json({ msg: "User not found" });
 
     if (user.password) {
