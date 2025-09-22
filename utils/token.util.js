@@ -12,11 +12,26 @@ const signRefreshToken = (user) => {
   });
 };
 
+signPendingVerificationToken = (user) => {
+  return jwt.sign(
+    {
+      id: user._id,
+      email: user.email,
+      pendingVerification: true,
+    },
+    process.env.JWT_PENDING_VERIFY_SECRET,
+    { expiresIn: process.env.JWT_PENDING_VERIFY_EXPIRES }
+  );
+};
+
 const verifyAccessToken = (token) =>
   jwt.verify(token, process.env.JWT_ACCESS_SECRET);
 
 const verifyRefreshToken = (token) =>
   jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+
+const verifyPendingVerificationToken = (token) =>
+  jwt.verify(token, process.env.JWT_PENDING_VERIFY_SECRET);
 
 module.exports = {
   signAccessToken,
