@@ -29,6 +29,7 @@ const requestPasswordReset = require("../controllers/auths/forgotPassword.contro
 const resetPassword = require("../controllers/auths/resetPassword.controller");
 const validateResetToken = require("../controllers/auths/validateResetToken.controller");
 const updatePassword = require("../controllers/auths/updatePassword.controller");
+const verifyAccount = require("../controllers/auths/verifyAccount.controller");
 
 router.delete("/logout", authenticate, logout);
 
@@ -72,5 +73,6 @@ router.post("/forgot-password", requestPasswordReset);
 router.put("/reset-password", resetPassword);
 router.post("/validate-reset-token", validateResetToken);
 router.put("/update-password", authenticate, updatePassword);
+router.put("/verify-account", verifyAccount);
 
 module.exports = router;
