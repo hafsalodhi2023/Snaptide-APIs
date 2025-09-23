@@ -40,6 +40,9 @@ async function verifyOtp(req, res) {
 
     const accessToken = signAccessToken(user);
     const refreshToken = signRefreshToken(user);
+
+    console.log(accessToken, refreshToken);
+
     setRefreshCookie(res, refreshToken);
 
     return res.json({
