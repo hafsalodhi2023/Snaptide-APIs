@@ -49,8 +49,4 @@ app.use("/uploads", uploadRoutes);
 
 app.get("/avatar-proxy", avatarProxy);
 
-app.listen(PORT, () => {
-  debug(`Server is running on http://localhost:${PORT}`);
-});
-
 module.exports = app;
