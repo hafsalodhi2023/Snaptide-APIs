@@ -38,6 +38,10 @@ app.use(cookieParser());
 app.use(globalLimiter); // Apply global rate limiter
 app.use(passport.initialize());
 
+app.get("/", (req, res) => {
+  res.send("Welcome to Snaptide APIs");
+});
+
 // Main Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
