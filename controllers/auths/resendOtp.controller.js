@@ -6,7 +6,10 @@ const { verifyPendingVerificationToken } = require("../../utils/token.util");
 
 async function resendOtp(req, res) {
   try {
-    const { token } = req.body; // frontend sends pendingVerification JWT
+    const { token } = req.body;
+
+    console.log(token);
+
     const payload = verifyPendingVerificationToken(token);
 
     const user = await User.findById(payload.id);
