@@ -8,8 +8,6 @@ async function resendOtp(req, res) {
   try {
     const { token } = req.body;
 
-    console.log(token);
-
     const payload = verifyPendingVerificationToken(token);
 
     const user = await User.findById(payload.id);
@@ -41,7 +39,6 @@ async function resendOtp(req, res) {
 
     return res.json({ msg: "OTP resent successfully" });
   } catch (err) {
-    console.log(err);
     return res.status(400).json({ msg: "Invalid or expired pending token" });
   }
 }
