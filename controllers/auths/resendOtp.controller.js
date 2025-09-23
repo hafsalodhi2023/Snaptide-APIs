@@ -41,6 +41,7 @@ async function resendOtp(req, res) {
 
     return res.json({ msg: "OTP resent successfully" });
   } catch (err) {
+    console.log(err);
     return res.status(400).json({ msg: "Invalid or expired pending token" });
   }
 }
