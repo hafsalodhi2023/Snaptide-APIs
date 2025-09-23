@@ -10,7 +10,8 @@ const { setRefreshCookie } = require("../../utils/refreshCookie.util");
 
 async function verifyOtp(req, res) {
   try {
-    const { token, otp } = req.body; // token = pendingVerification JWT
+    const { token, otp } = req.body;
+    console.log(token, otp);
     const payload = verifyPendingVerificationToken(token);
 
     const user = await User.findById(payload.id);
@@ -34,11 +35,9 @@ async function verifyOtp(req, res) {
     record.usedAt = new Date();
     await record.save();
 
-    // update user
     user.isVerified = true;
     await user.save();
 
-    // give normal login tokens
     const accessToken = signAccessToken(user);
     const refreshToken = signRefreshToken(user);
     setRefreshCookie(res, refreshToken);
