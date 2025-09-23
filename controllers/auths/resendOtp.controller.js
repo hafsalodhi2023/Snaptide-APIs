@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const VerificationToken = require("../../models/verificationToken.model");
+const VerificationToken = require("../../models/otp.model");
 const User = require("../../models/user.model");
 const sendEmail = require("../../utils/mailer.util");
 const { verifyPendingVerificationToken } = require("../../utils/token.util");
