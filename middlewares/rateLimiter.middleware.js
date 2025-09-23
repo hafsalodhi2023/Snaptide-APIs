@@ -59,6 +59,7 @@ const globalLimiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => req.method === "OPTIONS", // 🚀 ignore preflight
 });
 
 module.exports = {

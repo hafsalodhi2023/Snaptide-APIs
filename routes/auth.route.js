@@ -34,6 +34,12 @@ const resendOtp = require("../controllers/auths/resendOtp.controller");
 
 router.delete("/logout", authenticate, logout);
 
+const registerLimiter = (req, res, next) => {
+  if (req.method === "OPTIONS") {
+    return next();
+  }
+};
+
 router.post("/register", registerLimiter, register);
 // router.post("/register", register);
 
