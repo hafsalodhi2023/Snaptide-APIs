@@ -11,7 +11,6 @@ const { setRefreshCookie } = require("../../utils/refreshCookie.util");
 async function verifyOtp(req, res) {
   try {
     const { token, otp } = req.body;
-    console.log(token, otp);
     const payload = verifyPendingVerificationToken(token);
 
     const user = await User.findById(payload.id);

@@ -6,8 +6,6 @@ async function updatePassword(req, res) {
     const { oldPassword, newPassword } = req.body;
     const accessToken = req.cookies.accessToken;
 
-    console.log("old password: ", oldPassword, "new Password: ", newPassword);
-
     const payload = verifyAccessToken(accessToken);
 
     if (newPassword.length < 8) {
@@ -31,7 +29,6 @@ async function updatePassword(req, res) {
 
     return res.status(200).json({ msg: "Password updated successfully" });
   } catch (err) {
-    console.error("Error in updatePassword:", err);
     return res.status(500).json({ msg: "Server error" });
   }
 }

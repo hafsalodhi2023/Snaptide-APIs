@@ -63,7 +63,6 @@ const login = (req, res, next) => {
             isVerified: user.isVerified,
           });
         } catch (e) {
-          console.log(e);
           return res.status(500).json({ msg: "Could not send OTP" });
         }
       }
