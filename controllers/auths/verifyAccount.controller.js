@@ -40,8 +40,6 @@ async function verifyOtp(req, res) {
     const accessToken = signAccessToken(user);
     const refreshToken = signRefreshToken(user);
 
-    console.log(accessToken, refreshToken);
-
     setRefreshCookie(res, refreshToken);
 
     return res.json({
@@ -55,7 +53,6 @@ async function verifyOtp(req, res) {
       },
     });
   } catch (err) {
-    console.log(err);
     return res.status(400).json({ msg: "Invalid or expired token" });
   }
 }
