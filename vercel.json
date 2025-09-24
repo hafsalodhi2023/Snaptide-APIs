@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "snaptide-tools-apis",
+  "name": "snaptidetools-apis",
   "builds": [
     {
       "src": "app.js",
