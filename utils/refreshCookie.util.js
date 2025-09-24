@@ -1,8 +1,8 @@
 const setRefreshCookie = (res, token) => {
   res.cookie("refreshToken", token, {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "strict",
     path: "/",
     maxAge: 7 * 24 * 60 * 60 * 1000, // keep in sync with env
   });
@@ -11,15 +11,15 @@ const setRefreshCookie = (res, token) => {
 const clearRefreshCookie = (res) => {
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "strict",
   });
 };
 
 const clearAccessCookie = (res) => {
   res.clearCookie("accessToken", {
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "strict",
   });
 };
 
