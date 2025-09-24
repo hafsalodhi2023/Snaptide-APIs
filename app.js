@@ -6,6 +6,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 
+const PORT = process.env.PORT;
+
 // Import Database Connection
 const connectDB = require("./config/db.config");
 
@@ -45,5 +47,9 @@ app.use("/users", userRoutes);
 app.use("/uploads", uploadRoutes);
 
 app.get("/avatar-proxy", avatarProxy);
+
+app.listen(PORT, () => {
+  debug(`Server running on http://localhost:${PORT}`);
+});
 
 module.exports = app;
