@@ -6,8 +6,6 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 
-const debug = require("debug")("server:app.js");
-
 // Import Database Connection
 const connectDB = require("./config/db.config");
 
@@ -23,7 +21,6 @@ const userRoutes = require("./routes/user.route");
 const uploadRoutes = require("./routes/upload.route");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 connectDB();
 app.use(
