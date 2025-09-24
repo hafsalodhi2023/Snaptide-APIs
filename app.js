@@ -6,7 +6,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 
-const PORT = process.env.PORT;
+const debug = require("debug")("server:app.js");
+const PORT = process.env.PORT || 5000;
 
 // Import Database Connection
 const connectDB = require("./config/db.config");
